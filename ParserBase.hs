@@ -2,17 +2,12 @@
 Module       : ParserBase
 Description  : Primitive parsers and parser combinators.
 Maintainer   : CS 131, Programming Languages (Melissa O'Neill, Chris Stone, Ben Wiedermann)
-
-NOTE: You do not need to understand the code in this file. It uses some features of
-Haskell that we have not yet learned.
 -}
 
 
 module ParserBase (Parser,pfail,get,parse,parseFile,parseNamed,
                    (<||>),succeeding,eof,(<|>),some,many,Alternative, MonadPlus, empty,
                    join, mfilter) where
-
-        -- Also, is instances of Functor, Applicative, Monad and MonadPlus
 
 import Control.Applicative hiding (optional)
 import Control.Monad
@@ -42,17 +37,6 @@ failure prevErr@(prevMsg,prevPosn) msg posn = (bestErr, Failure newErr)
 -- | A parser that always fails.
 pfail :: Parser a
 pfail = Control.Monad.Fail.fail "No parse (via pfail)"
--- ******* REMEMBER THIS!!!! ********************
--- I HAD THIS ERROR, I THINK IT IS FIXED BUT REMEMEBR THAT THIS HAPPENED!
--- ParserBase.hs:44:9: error:
---     Ambiguous occurrence ‘fail’
---     It could refer to either ‘Control.Monad.fail’,
---                              imported from ‘Control.Monad’ at ParserBase.hs:18:1-20
---                              (and originally defined in ‘GHC.Base’)
---                           or ‘Control.Monad.Fail.fail’,
---                              imported from ‘Control.Monad.Fail’ at ParserBase.hs:19:1-25
-
-
 
 -- | Get a single character from the input. Fails if the input is empty.
 get :: Parser Char

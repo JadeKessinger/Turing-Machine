@@ -5,13 +5,6 @@ Description  : Re-definitions of basic parsers and parser combinators from
 Maintainer   : CS 131, Programming Languages (Melissa O'Neill, Chris Stone, Ben Wiedermann)
 -}
 
--- The following complicated module declaration makes it so that we can use our
--- parser-combinator library by writing the line:
---
---   import ParserCombinators
---
--- (Without this complicated declaration, we'd have to re-import the basic
--- parsers and parser combinators that are defined elsewhere.)
 module ParserCombinators (
 
       -- * Types
@@ -97,37 +90,6 @@ import Data.Char as Char  -- so we can use toUpper, isDigit, etc. in this file.
 --------------------------------------------------------------------------------
 
 import ParserBase
-
--- The import above gives us:
---
---    pfail  :: Parser a
---    return :: a -> Parser a
---    get    :: Parser Char
---    <|>    :: Parser a -> Parser a -> Parser a 
---    <||>   :: Parser a -> Parser a -> Parser a 
---    >>=    :: Parser a ->  (a -> Parser b) -> Parser b
---
--- and
---
---    parse  :: String -> Parser a -> a
---
--- The course web page has more information about what these things do, in
--- particular, you can check out
---
---     https://www.cs.hmc.edu/cs131/ParserBaseOperations
-
-
---------------------------------------------------------------------------------
--- Useful parser combinators
---
--- You *don't* need to recall the internals of how they work.  In fact,
--- >> YOU DO NOT NEED TO BE ABLE TO MAKE SENSE OF THIS IMPLEMENTATION <<
---
--- Note that the functions below are written in a quite different style from
--- the style you probably saw in class, because they use library functions
--- (and function composition, a.k.a. point free style).  Also, some of
--- the types are more general than the versions from class.
---------------------------------------------------------------------------------
 
 -- | Given a parser, transform its result by passing it through a provided function
 -- 

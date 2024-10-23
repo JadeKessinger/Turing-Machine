@@ -31,3 +31,6 @@ data Transition = Transition {write :: Symbol,
 
 data Direction = Lt | Rt deriving (Show, Eq, Ord)
 
+-- prints out a nice string of a configuration
+stringFormat :: Config -> String
+stringFormat config = show config

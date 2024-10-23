@@ -1,10 +1,10 @@
 {-|
-Module       : TMFormat
+Module       : TMDotVisualization
 Description  : Formats a Turing Machine into dot language (http://www.webgraphviz.com/) for visualization
 Maintainer   : Jade Kessinger
 -}
 
-module TMFormat where 
+module TMDotVisualization where 
 
 import TMAST
 

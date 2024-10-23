@@ -1,6 +1,6 @@
 {-|
 Module       : TM
-Description  : An example Turing Machine to run and generate a resulting "dotTM.txt" file
+Description  : Runs an example Turing Machine which results in a "dotTM.txt" file
 Maintainer   : Jade Kessinger
 -}
 
@@ -14,15 +14,16 @@ import Control.Monad
 import Data.Map (Map)
 import qualified Data.Map as Map
 
-machine = Machine {config = Config Tape {left = ["0", "1", "0", "1", "1"], right = [], tapeHead = "_"} "0", 
-                         states = Map.fromList [("0", Map.fromList [("0", Transition {write = "0", move = Lt, goto = "Halt"}), 
-                                                                    ("1", Transition {write = "1", move = Rt, goto = "Halt"}),
-                                                                    ("_", Transition {write = "_", move = Lt, goto = "1"})]),
-                                                ("1", Map.fromList [("0", Transition {write = "0", move = Lt, goto = "1"}), 
-                                                                    ("1", Transition {write = "1", move = Lt, goto = "1"}),
-                                                                    ("_", Transition {write = "_", move = Rt, goto = "Halt"})])]}
-resultConfig = simulate machine 
-resultString = stringFormat resultConfig
-dotString     = dotFormat machine 
-makeDotFile   = writeFile "dotTM.txt" dotString
+machine         = Machine {config = Config Tape {left = ["0", "1", "0", "1", "1"], right = [], tapeHead = "_"} "0", 
+                           states = Map.fromList 
+                            [("0", Map.fromList [("0", Transition {write = "0", move = Lt, goto = "Halt"}), 
+                                                 ("1", Transition {write = "1", move = Rt, goto = "Halt"}),
+                                                 ("_", Transition {write = "_", move = Lt, goto = "1"})]),
+                             ("1", Map.fromList [("0", Transition {write = "0", move = Lt, goto = "1"}), 
+                                                 ("1", Transition {write = "1", move = Lt, goto = "1"}),
+                                                 ("_", Transition {write = "_", move = Rt, goto = "Halt"})])]}
+resultConfig    = simulate machine 
+resultString    = stringFormat resultConfig
+dotString       = dotFormat machine 
+makeDotFile     = writeFile "dotTM.txt" dotString
 

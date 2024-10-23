@@ -1,6 +1,6 @@
 {-|
 Module       : TMFormat
-Description  : Formats a Turing Machine into dot language for visualization
+Description  : Formats a Turing Machine into dot language (http://www.webgraphviz.com/) for visualization
 Maintainer   : Jade Kessinger
 -}
 

@@ -18,20 +18,25 @@ simulate Machine {config = Config tape "Halt", states = _} =
 simulate machine = simulate (doStep machine)
 
 doStep :: Machine -> Machine
-doStep Machine {config = Config Tape {left = leftTape, right = rightTape, tapeHead = tapeHead} curState, states = states} = 
-        case Map.lookup curState states of 
-            Just transitions -> 
-                case Map.lookup tapeHead transitions of 
-                    Just Transition {write = write, move = move, goto = goto} ->
-                        let newLeftTape     = stepLeftTape leftTape move write
-                            newRightTape    = stepRightTape rightTape move write
-                            newHead         = stepHead leftTape rightTape move in 
-                        Machine {config = Config Tape {left = newLeftTape, right = newRightTape, tapeHead = newHead} goto, states = states}
-                    Nothing -> error ("No transition defined for " ++ tapeHead)
-            Nothing -> error ("No defined transitions for " ++ curState)
+doStep Machine {config = 
+    Config Tape {left = left, right = right, tapeHead = tapeHead} curState, 
+    states = states
+    } = 
+    case Map.lookup curState states of 
+        Just transitions -> 
+            case Map.lookup tapeHead transitions of 
+                Just Transition {write = write, move = move, goto = goto} ->
+                    let newLeftTape     = stepLeftTape left move write
+                        newRightTape    = stepRightTape right move write
+                        newHead         = stepHead left right move in 
+                    Machine {config = 
+                        Config Tape {left = newLeftTape, right = newRightTape, tapeHead = newHead} goto, 
+                        states = states}
+                Nothing -> error ("No transition defined for " ++ tapeHead)
+        Nothing -> error ("No defined transitions for " ++ curState)
 
 -- Moves the left tape one step to the left or right given a new write symbol
--- Makes the tape infinite by modeling empty lists as blank symbols
+-- Imitates an infinite tape by modeling empty lists as blank symbols
 -- Returns thet updated left tape
 stepLeftTape :: [Symbol] -> Direction -> Symbol -> [Symbol]
 stepLeftTape [] Lt _            = ["_"]
@@ -40,7 +45,7 @@ stepLeftTape leftTape Lt _      = tail leftTape
 stepLeftTape leftTape Rt write  = write:leftTape
 
 -- Moves the right tape to the left or right given a new write symbol
--- Makes the tape infinite by modeling empty lists as blank symbols
+-- Imitates an infinite tape by modeling empty lists as blank symbols
 -- Returns thet updated right tape 
 stepRightTape :: [Symbol] -> Direction -> Symbol -> [Symbol]
 stepRightTape [] Lt write           = [write]
@@ -49,11 +54,11 @@ stepRightTape rightTape Lt write    = write:rightTape
 stepRightTape rightTape Rt _        = tail rightTape
 
 -- Moves the head of the tape to the left or right
--- Makes the tape infinite by modeling empty lists as blank symbols 
+-- Imitates an infinite tape by modeling empty lists as blank symbols 
 -- Returns thet updated head
 stepHead :: [Symbol] -> [Symbol] -> Direction -> Symbol
-stepHead [] [] _            = "_"
-stepHead [] _ Lt            = "_"
-stepHead _ [] Rt            = "_"
-stepHead leftTape _ Lt      = head leftTape
-stepHead _ rightTape Rt     = head rightTape
+stepHead [] [] _        = "_"
+stepHead [] _ Lt        = "_"
+stepHead _ [] Rt        = "_"
+stepHead leftTape _ Lt  = head leftTape
+stepHead _ rightTape Rt = head rightTape

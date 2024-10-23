@@ -9,6 +9,7 @@ module TMAST where
 import Data.Map (Map)
 import qualified Data.Map as Map
 
+
 type Symbol = String
 type CurrentState = StateName
 type StateName = String
@@ -28,6 +29,5 @@ data Transition = Transition {write :: Symbol,
                               move :: Direction, 
                               goto :: StateName} deriving Show
 
-data Direction = Lt | Rt
-               deriving (Show, Eq, Ord)
+data Direction = Lt | Rt deriving (Show, Eq, Ord)
 

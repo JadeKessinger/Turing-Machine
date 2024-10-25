@@ -17,7 +17,7 @@ https://drive.google.com/file/d/1AYhrSBJHNBJkZ83T8FBg6q7tzFStS4Vd/view?usp=shari
 
 If you want to see a different Turing Machine, change the `machine` in `TM.hs`. Define the `Config` with the current state and left, right, and head of the tape - make sure the left tape is a list to the left of the tape head read from right to left (not left to right!). Define the states and their corresponding read, write, move, and resulting state. 
 
-An example output is stored in `example`. The example machine flips all 0s to 1s and 1s to 0s. A more human-readable version of this TM with an example trace can be found in `flipBitsTM.txt`. The resulting configuration from running `TM.hs` on this machine is stored in `resultString.txt`, and the dot file produced is in `dotTM.txt`. The visualization of the machine is stored as `dotTM.pdf`.
+An example output is stored in `example`. The example machine flips all 0s to 1s and 1s to 0s. A more human-readable version of this TM with an example trace can be found in `flipBitsTM.txt`. The resulting configuration from running `TM.hs` on this machine is stored in `resultString.txt`, and the dot file produced is in `flipBitsDotTM.txt`. The visualization of the machine is stored as `flipBitsDotTM.png`.
 
 ## Implementation Details
 

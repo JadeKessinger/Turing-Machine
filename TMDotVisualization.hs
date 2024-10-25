@@ -12,11 +12,11 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 
 
-formatTMAsDotProgram :: Machine -> String 
-formatTMAsDotProgram Machine {config = Config tape startState, states = states} = 
+formatAsDotProgram :: Machine -> String 
+formatAsDotProgram Machine {config = Config tape startState, states = states} = 
     "digraph D {" ++ "\n\n" ++ 
         "init -> " ++ startState ++ ";" ++ "\n\n" ++
-        statesFormat (Map.toList states) ++
+        formatStates (Map.toList states) ++
         "Halt -> Halt;" ++ "\n\n" ++
     "}"
 
@@ -33,5 +33,5 @@ formatTransitions stateName ((readSym, Transition {write = write, move = move, g
     "[label = \" " ++ readSym ++ ":(" ++ write ++ "," ++ moveLetter ++ ")\"];\n" ++
     (formatTransitions stateName otherTransitions)
     where moveLetter = case move of 
-        Lt -> "L"
-        Rt -> "R"
+            Lt -> "L"
+            Rt -> "R"

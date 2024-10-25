@@ -1,0 +1,3 @@
+The value stored in resultString as printed out to the console after loading TM.hs:
+
+"Config (Tape {left = [\"_\",\"1\",\"0\",\"1\",\"0\",\"0\",\"_\",\"_\"], right = [\"_\"], tapeHead = \"_\"}) \"Halt\""

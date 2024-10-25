@@ -8,6 +8,7 @@ module TM where
 
 import TMAST 
 import TMSimulate
+import TMDotVisualization
 import System.IO
 import Control.Monad
 
@@ -35,6 +36,5 @@ machine = Machine {
 
 resultConfig = simulate machine 
 resultString = stringFormat resultConfig
-dotString = dotFormat machine 
+dotString = formatAsDotProgram machine 
 makeDotFile = writeFile "dotTM.txt" dotString
-
